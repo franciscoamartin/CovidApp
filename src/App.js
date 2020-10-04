@@ -52,21 +52,23 @@ function App() {
       </div>
       <div className='app__main'>
         <h3>{countrySelected.country}</h3>
-        <InfoBox
-          title='Deaths today'
-          cases={countrySelected.todayDeaths}
-          total={countrySelected.deaths}
-        />
-        <InfoBox
-          title='Cases today'
-          cases={countrySelected.todayCases}
-          total={countrySelected.cases}
-        />
-        <InfoBox
-          title='Recovered today'
-          cases={countrySelected.todayRecovered}
-          total={countrySelected.recovered}
-        />
+        <div className='country__info'>
+          <InfoBox
+            title='Deaths today'
+            cases={countrySelected.todayDeaths}
+            total={countrySelected.deaths}
+          />
+          <InfoBox
+            title='Cases today'
+            cases={countrySelected.todayCases}
+            total={countrySelected.cases}
+          />
+          <InfoBox
+            title='Recovered today'
+            cases={countrySelected.todayRecovered}
+            total={countrySelected.recovered}
+          />
+        </div>
       </div>
     </div>
   );
