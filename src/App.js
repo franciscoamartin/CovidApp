@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { MenuItem, FormControl, Select } from '@material-ui/core';
 import InfoBox from './infoBox';
+import { getAllCountries, getCountryByCode } from './services/countryService';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -10,14 +11,12 @@ function App() {
 
   useEffect(() => {
     const getCountriesData = () => {
-      fetch('https://disease.sh/v3/covid-19/countries')
-        .then((response) => response.json())
-        .then((data) => {
-          const countries = data.map((x) => {
-            return { name: x.country, value: x.countryInfo.iso2 };
-          });
-          setCountries(countries);
+      getAllCountries().then((data) => {
+        const countries = data.map((x) => {
+          return { name: x.country, value: x.countryInfo.iso2 };
         });
+        setCountries(countries);
+      });
     };
     getCountriesData();
   }, []);
@@ -25,11 +24,9 @@ function App() {
   const onCountryChange = (event) => {
     const countryCode = event.target.value;
     setCountrySelectedCode(countryCode);
-    fetch('https://disease.sh/v3/covid-19/countries/' + countryCode)
-      .then((response) => response.json())
-      .then((data) => {
-        setCountrySelected(data);
-      });
+    getCountryByCode(countryCode).then((data) => {
+      setCountrySelected(data);
+    });
   };
 
   return (
