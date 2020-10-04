@@ -21,14 +21,4 @@ code {
 
 .app__main {
   display: flex;
-  flex-direction: column;
-  margin: 3em 3em;
-  box-shadow: 16px 17px 20px 0px rgba(0, 0, 0, 0.315);
-  border-radius: 20px;
-  text-align: center;
-}
-
-.country__info {
-  display: flex;
-  justify-content: space-around;
 }
