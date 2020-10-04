@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { MenuItem, FormControl, Select } from '@material-ui/core';
 import InfoBox from './infoBox';
-import { getAllCountries, getCountryByCode } from './services/countryService';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -11,12 +10,14 @@ function App() {
 
   useEffect(() => {
     const getCountriesData = () => {
-      getAllCountries().then((data) => {
-        const countries = data.map((x) => {
-          return { name: x.country, value: x.countryInfo.iso2 };
+      fetch('https://disease.sh/v3/covid-19/countries')
+        .then((response) => response.json())
+        .then((data) => {
+          const countries = data.map((x) => {
+            return { name: x.country, value: x.countryInfo.iso2 };
+          });
+          setCountries(countries);
         });
-        setCountries(countries);
-      });
     };
     getCountriesData();
   }, []);
@@ -24,9 +25,11 @@ function App() {
   const onCountryChange = (event) => {
     const countryCode = event.target.value;
     setCountrySelectedCode(countryCode);
-    getCountryByCode(countryCode).then((data) => {
-      setCountrySelected(data);
-    });
+    fetch('https://disease.sh/v3/covid-19/countries/' + countryCode)
+      .then((response) => response.json())
+      .then((data) => {
+        setCountrySelected(data);
+      });
   };
 
   return (
@@ -49,23 +52,21 @@ function App() {
       </div>
       <div className='app__main'>
         <h3>{countrySelected.country}</h3>
-        <div className='country__info'>
-          <InfoBox
-            title='Deaths today'
-            cases={countrySelected.todayDeaths}
-            total={countrySelected.deaths}
-          />
-          <InfoBox
-            title='Cases today'
-            cases={countrySelected.todayCases}
-            total={countrySelected.cases}
-          />
-          <InfoBox
-            title='Recovered today'
-            cases={countrySelected.todayRecovered}
-            total={countrySelected.recovered}
-          />
-        </div>
+        <InfoBox
+          title='Deaths today'
+          cases={countrySelected.todayDeaths}
+          total={countrySelected.deaths}
+        />
+        <InfoBox
+          title='Cases today'
+          cases={countrySelected.todayCases}
+          total={countrySelected.cases}
+        />
+        <InfoBox
+          title='Recovered today'
+          cases={countrySelected.todayRecovered}
+          total={countrySelected.recovered}
+        />
       </div>
     </div>
   );
