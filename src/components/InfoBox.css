@@ -1,0 +1,36 @@
+.info__box {
+  /* flex: 1; */
+  width: 100%;
+  margin-right: 10px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.info__box::before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+.info__box:nth-child(1)::before {
+  background: #f44336;
+}
+
+.info__boxContent {
+  text-align: left;
+  align-items: center;
+}
+
+.info__box:nth-child(1) .info__boxNumberCase {
+  color: #f44336;
+}
+.info__box:nth-child(2) .info__boxNumberCase {
+  color: #00e676;
+}
+.info__box:nth-child(3) .info__boxNumberCase {
+  color: #f44336;
+}

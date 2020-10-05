@@ -1,0 +1,10 @@
+.live__caseBox {
+  margin: 10px;
+}
+.live__casesList:nth-child(odd) {
+  background-color: #e0e0e0;
+}
+.live__casesListNumber {
+  font-weight: bold;
+  float: right;
+}
