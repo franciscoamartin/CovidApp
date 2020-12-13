@@ -4,6 +4,7 @@ import { getAllCountries, getCountryByCode } from './services/countryService';
 import Table from './Table';
 import InfoBox from './infoBox';
 import Map from './Map';
+import LineGraph from './LineGraph'
 import { sortData } from './util'
 import './App.css';
 
@@ -81,8 +82,7 @@ function App() {
           <h3>Live Cases By Country</h3>
           <Table countries={tableData} />
           <h3>World new cases</h3>
-          {/* table
-             graph */}
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
