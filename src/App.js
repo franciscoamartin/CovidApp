@@ -63,7 +63,7 @@ function App() {
     <div className='app'>
       <div className='app__left'>
         <div className='app__header'>
-          <h1>MAPA DO CORONA VÍRUS</h1>
+          <h1>COVID-19 TRACKER</h1>
           <FormControl className='app__dropdown'>
             <Select
               variant='outlined'
