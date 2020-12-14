@@ -63,7 +63,7 @@ function App() {
     <div className='app'>
       <div className='app__left'>
         <div className='app__header'>
-          <h1>Covid App</h1>
+          <h1>MAPA DO CORONA VÍRUS</h1>
           <FormControl className='app__dropdown'>
             <Select
               variant='outlined'
@@ -79,28 +79,30 @@ function App() {
             </Select>
           </FormControl>
         </div>
-        <div className='app__main'>
-          <h3>{countryInfo.country}</h3>
-          <div className='country__info'>
-            <InfoBox
-              onClick={(e) => setCasesType("deaths")}
-              title='Deaths today'
-              cases={prettyPrintStat(countryInfo.todayDeaths)}
-              total={prettyPrintStat(countryInfo.deaths)}
-            />
-            <InfoBox
-              onClick={(e) => setCasesType("cases")}
-              title='Cases today'
-              cases={prettyPrintStat(countryInfo.todayCases)}
-              total={prettyPrintStat(countryInfo.cases)}
-            />
-            <InfoBox
-              onClick={(e) => setCasesType("recovered")}
-              title='Recovered today'
-              cases={prettyPrintStat(countryInfo.todayRecovered)}
-              total={prettyPrintStat(countryInfo.recovered)}
-            />
-          </div>
+        <div className='app__stats'>
+          <InfoBox
+            isRed
+            active={casesType === "cases"}
+            onClick={(e) => setCasesType("cases")}
+            title='Cases today'
+            cases={prettyPrintStat(countryInfo.todayCases)}
+            total={prettyPrintStat(countryInfo.cases)}
+          />
+          <InfoBox
+            active={casesType === "recovered"}
+            onClick={(e) => setCasesType("recovered")}
+            title='Recovered today'
+            cases={prettyPrintStat(countryInfo.todayRecovered)}
+            total={prettyPrintStat(countryInfo.recovered)}
+          />
+          <InfoBox
+            isRed
+            active={casesType === "deaths"}
+            onClick={(e) => setCasesType("deaths")}
+            title='Deaths today'
+            cases={prettyPrintStat(countryInfo.todayDeaths)}
+            total={prettyPrintStat(countryInfo.deaths)}
+          />
         </div>
         <Map countries={mapCountries} casesType={casesType} center={mapCenter} zoom={zoom} />
       </div>
@@ -108,8 +110,8 @@ function App() {
         <CardContent>
           <h3>Live Cases By Country</h3>
           <Table countries={tableData} />
-          <h3>World new cases</h3>
-          <LineGraph />
+          <h3 className="app__graphTitle">World new {casesType}</h3>
+          <LineGraph className='app__graph' casesType={casesType} />
         </CardContent>
       </Card>
     </div>

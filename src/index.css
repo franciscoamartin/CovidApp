@@ -12,12 +12,6 @@ code {
     monospace;
 }
 
-.app__header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  justify-content: space-between;
-}
 
 .app__main {
   display: flex;
@@ -26,11 +20,6 @@ code {
   box-shadow: 16px 17px 20px 0px rgba(0, 0, 0, 0.315);
   border-radius: 20px;
   text-align: center;
-}
-
-.country__info {
-  display: flex;
-  justify-content: space-around;
 }
 
 @media (max-width: 990px){
